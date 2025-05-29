@@ -1,0 +1,12 @@
+version: "3"
+
+tasks:
+  default:
+    silent: true
+    cmds:
+      - task --list-all
+
+  run-launchdarkly:
+    desc: "LaunchDarklyを起動"
+    cmds:
+      - bash run.sh go run ./launch_darkly/main.go
