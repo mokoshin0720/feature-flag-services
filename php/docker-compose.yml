@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  php74:
+    build: .
+    container_name: php74-app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - PHP_IDE_CONFIG=serverName=docker
+    networks:
+      - php74-network
+
+networks:
+  php74-network:
+    driver: bridge

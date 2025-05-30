@@ -4,6 +4,9 @@ includes:
   golang:
     taskfile: ./golang/taskfile.yaml
     dir: ./golang
+  php:
+    taskfile: ./php/taskfile.yaml
+    dir: ./php
 
 tasks:
   default:
