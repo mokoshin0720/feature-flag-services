@@ -13,6 +13,16 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # 作業ディレクトリを設定
 WORKDIR /app
 
+# Composer設定ファイルをコピー
+COPY composer.json ./
+COPY composer.lock* ./
+
+# Composerで依存関係をインストール
+RUN composer install --no-dev --optimize-autoloader
+
+# アプリケーションファイルをコピー
+COPY . .
+
 # ポート8000を公開
 EXPOSE 8000
 
