@@ -10,6 +10,7 @@ services:
       - .:/app
     environment:
       - PHP_IDE_CONFIG=serverName=docker
+      - LAUNCHDARKLY_SDK_KEY=${LAUNCHDARKLY_SDK_KEY:-sample-key}
     networks:
       - php74-network
 

@@ -22,6 +22,33 @@ if (isset($composerNotInstalled) && $composerNotInstalled) {
 } else {
     echo "<li>Composer依存関係: ✅ インストール済み</li>";
     echo "<li>LaunchDarkly SDK: " . ($ldAvailable ? '✅ インポート完了' : '❌') . "</li>";
+
+    // 環境変数からSDKキーを取得
+    $sdkKey = getenv('LAUNCHDARKLY_SDK_KEY') ?: $_ENV['LAUNCHDARKLY_SDK_KEY'] ?? null;
+    
+    if (empty($sdkKey)) {
+        echo "<li>LaunchDarkly SDK Key: ❌ 環境変数 LAUNCHDARKLY_SDK_KEY が設定されていません</li>";
+        echo "<li>フラグテスト: ❌ スキップされました</li>";
+    } else {
+        echo "<li>LaunchDarkly SDK Key: ✅ 環境変数から取得</li>";
+        echo "<li>SDK Key: " . $sdkKey . "</li>";
+        
+        $client = new LaunchDarkly\LDClient($sdkKey);
+
+        $flagKey = "sample-in-private";
+        $contextKey = "context-key-123abc";
+        $contextName = "test";
+
+        $context = LDContext::builder($contextKey)
+        ->name($contextName)
+        ->build();
+
+        if ($client->variation($flagKey, $context)) {
+        echo "✅ フラグが有効です";
+        } else {
+            echo "❌ フラグが無効です";
+        }
+    }
 }
 echo "</ul>";
 
