@@ -39,12 +39,12 @@ if (isset($composerNotInstalled) && $composerNotInstalled) {
         $contextKey = "context-key-123abc";
         $contextName = "test";
 
-        $context = LDContext::builder($contextKey)
-        ->name($contextName)
-        ->build();
+        $user = (new LaunchDarkly\LDUserBuilder($contextKey))
+            ->name($contextName)
+            ->build();
 
-        if ($client->variation($flagKey, $context)) {
-        echo "✅ フラグが有効です";
+        if ($client->variation($flagKey, $user)) {
+            echo "✅ フラグが有効です";
         } else {
             echo "❌ フラグが無効です";
         }

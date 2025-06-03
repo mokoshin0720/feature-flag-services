@@ -4,7 +4,8 @@
     "type": "project",
     "require": {
         "php": ">=7.4",
-        "launchdarkly/server-sdk": "^4.0"
+        "launchdarkly/server-sdk": "^4.0",
+        "guzzlehttp/guzzle": "^7.4"
     },
     "autoload": {
         "psr-4": {
